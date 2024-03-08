@@ -131,6 +131,14 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+STATICFILES_DIR = [
+    "manage_post/static",
+    "user/static",
+]
+
+#Ubicación de los archivos estaticos
+STATIC_ROOT = BASE_DIR / "static"
+
 # Url publica para los archivos media
 MEDIA_URL = "media/"
 
