@@ -11,3 +11,6 @@ venv/
 
 .pg_service.conf
 .my_pgpass
+
+media/
+*.jpg
