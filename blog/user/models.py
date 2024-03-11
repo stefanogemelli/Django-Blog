@@ -1,5 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.core.mail import send_mail
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 class User(AbstractUser):
     full_name = models.CharField(max_length=255)
@@ -16,4 +23,18 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+@receiver(post_save, sender=User)
+def email(sender, instance, created, **kwargs):
+    if created:
+        print("Envío de email al registrarse, la config actual está obsoleta por cambios en la api de google")
+
+        # send_mail(
+        # "Subject here",
+        # "Here is the message. Welcome, you have successfully on our site",
+        # os.getenv("EMAIL_HOST_USER"),
+        # [instance.email],
+        # )   
+
+
 
