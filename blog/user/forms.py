@@ -23,6 +23,8 @@ class SignUpForm(UserCreationForm):
         ]
 
 class LoginForm(AuthenticationForm):
+    username = forms.CharField(label=False, help_text=None,widget=forms.TextInput(attrs={"placeholder":"Nombre de usuario"}))
+    password = forms.CharField(label=False, help_text=None,widget=forms.PasswordInput(attrs={"placeholder":"Contraseña"}))
     class Meta:
         model = User
         fields = [
