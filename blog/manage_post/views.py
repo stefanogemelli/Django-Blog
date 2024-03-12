@@ -34,4 +34,7 @@ class CategoryDetailView(DetailView):
 class ListAllCategoriesView(ListView):
     model = Category
     context_object_name = "categories"
-    
+
+class ShowPostDetailView(DetailView):
+    model = Article
+    context_object_name = "article"
