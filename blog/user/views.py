@@ -29,7 +29,7 @@ class SignUpView(CreateView):
 
         #Solicitud de inicio de sesión
         login(self.request, user)
-        return redirect("login")
+        return redirect("index")
 
 
 class LoginView(LoginView):
