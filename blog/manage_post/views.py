@@ -31,3 +31,7 @@ class CategoryDetailView(DetailView):
         context["navbar_category"] = Category.objects.filter(featured=True)
         return context
     
+class ListAllCategoriesView(ListView):
+    model = Category
+    context_object_name = "categories"
+    
