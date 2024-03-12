@@ -8,7 +8,7 @@ class Category(models.Model):
     name = models.CharField(max_length=20)
     image = models.ImageField(upload_to="Categories",blank=False, null=False)
     slug = models.SlugField(unique=True, max_length=40)
-    features = models.BooleanField(default=False)
+    featured = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     status = models.BooleanField(default=True)
