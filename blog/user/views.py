@@ -1,4 +1,5 @@
-from django.views.generic import CreateView, TemplateView
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, TemplateView, DeleteView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import authenticate, login
@@ -6,6 +7,8 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import logout
 from user.forms import ProfileForm, SignUpForm, LoginForm, UserForm
 from user.models import Profile
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 
 def logout_view(request):
@@ -68,4 +71,11 @@ class UserUpdateView(LoginRequiredMixin, TemplateView):
         if Profile.objects.filter(user=request.user).exists() == False:
             Profile.objects.create(user=request.user)
         return self.post(request, *args, **kwargs)
-        
+
+
+class UserDeleteView(DeleteView):
+    model = User
+    success_url = reverse_lazy("index")
+
+    def get_object(self, queryset=None):
+        return User.objects.get(id=self.request.user.id)
