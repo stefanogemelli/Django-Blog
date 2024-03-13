@@ -1,8 +1,8 @@
 from django import forms
-
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import get_user_model
 User = get_user_model()
+from user.models import Profile
 
 
 class SignUpForm(UserCreationForm):
@@ -30,4 +30,33 @@ class LoginForm(AuthenticationForm):
         fields = [
             "username",
             "password"
+        ]
+
+class UserForm(forms.ModelForm):
+
+    username = forms.CharField(help_text=None,
+                               label="Nombre de usuario")
+    
+    full_name = forms.CharField(help_text=None,
+                                label="Nombre completo")
+    email = forms.EmailField(label="Correo")
+
+    class Meta:
+        model = User
+        fields = [
+            "username",
+            "full_name",
+            "email",
+        ]
+
+class ProfileForm(forms.ModelForm):
+    photo = forms.ImageField(label="Foto",
+                             help_text=None,
+                             required=False,
+                             widget=forms.FileInput())
+    
+    class Meta:
+        model = Profile
+        fields = [
+            "photo",
         ]
