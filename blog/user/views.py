@@ -9,6 +9,8 @@ from user.forms import ProfileForm, SignUpForm, LoginForm, UserForm, PasswordCha
 from user.models import Profile
 from django.contrib.auth import get_user_model
 User = get_user_model()
+from django.views.generic import CreateView, TemplateView, DetailView
+from manage_post.models import Article
 
 
 def logout_view(request):
@@ -80,3 +82,12 @@ class PasswordsChangeView(LoginRequiredMixin, PasswordChangeView):
     login_url = "login"
     form_class = PasswordChangingForm
     success_url = reverse_lazy("index")
+
+class ViewProfile(DetailView):
+    model = User
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["post"] = Article.objects.filter(user_id=User.objects.get(id=self.kwargs["pk"]))
+        return context
+

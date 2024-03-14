@@ -16,7 +16,7 @@ class Profile(models.Model):
     photo = models.ImageField(upload_to="Profiles",blank=True, null=True)
     profession = models.CharField(max_length=50, null=True)
     about = models.TextField(null=True)
-    birthdate = models.DateTimeField(null=True)
+    birthday = models.DateTimeField(null=True)
     twitter = models.URLField(max_length=50, null=True)
     linkedin = models.URLField(max_length=50, null=True)
     facebook = models.URLField(max_length=50, null=True)

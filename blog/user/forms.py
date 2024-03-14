@@ -59,6 +59,12 @@ class ProfileForm(forms.ModelForm):
         model = Profile
         fields = [
             "photo",
+            "profession",
+            "about",
+            "birthday",
+            "twitter",
+            "linkedin",
+            "facebook",
         ]
 
 class PasswordChangingForm(PasswordChangeForm):
