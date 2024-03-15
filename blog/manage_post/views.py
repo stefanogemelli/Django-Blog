@@ -9,6 +9,7 @@ User = get_user_model()
 
 class IndexView(ListView):
     model = Article
+    template_name = "manage_post/index.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
