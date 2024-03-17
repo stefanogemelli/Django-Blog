@@ -23,7 +23,7 @@ class IndexView(ListView):
 
 class CategoryDetailView(DetailView):
     model = Category
-
+    template_name = "manage_post/category_detail.html"
     context_object_name = "category"
 
     def get_context_data(self, **kwargs):
@@ -31,7 +31,7 @@ class CategoryDetailView(DetailView):
 
         #Enviar articulos activos de acuerdo a su categoría
         context["articles"] = Article.objects.filter(status=True).filter(
-            catecories=Category.objects.get(slug=self.kwargs["slug"])
+            categories=Category.objects.get(slug=self.kwargs["slug"])
             )
         
         #Obtener la información de las categorias destacadas
@@ -63,3 +63,4 @@ class ShowPostDetailView(FormMixin, DetailView):
     
     def get_success_url(self):
         return reverse_lazy("post",kwargs={"slug":self.kwargs["slug"]})
+    
