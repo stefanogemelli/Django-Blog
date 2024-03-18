@@ -74,6 +74,14 @@ class ProfileForm(forms.ModelForm):
         ]
 
 class PasswordChangingForm(PasswordChangeForm):
+    old_password = forms.CharField(label=False,
+                                   widget=forms.PasswordInput(attrs={"placeholder":"Antigua contraseña"}))
+    
+    new_password1 = forms.CharField(label=False,
+                                   widget=forms.PasswordInput(attrs={"placeholder":"Nueva contraseña"}))
+    
+    new_password2 = forms.CharField(label=False,
+                                   widget=forms.PasswordInput(attrs={"placeholder":"Confirmar contraseña"}))
     class Meta:
         model = User
         fields = [

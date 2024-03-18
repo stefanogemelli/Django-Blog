@@ -81,6 +81,7 @@ class UserDeleteView(DeleteView):
     
 class PasswordsChangeView(LoginRequiredMixin, PasswordChangeView):
     login_url = "login"
+    template_name = "password/change_password.html"
     form_class = PasswordChangingForm
     success_url = reverse_lazy("index")
 
