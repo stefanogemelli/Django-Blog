@@ -44,6 +44,7 @@ class ListAllCategoriesView(ListView):
 
 class ShowPostDetailView(FormMixin, DetailView):
     model = Article
+    template_name = "manage_post/article_detail.html"
     form_class = CommentForm
     context_object_name = "article"
 
