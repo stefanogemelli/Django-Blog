@@ -50,7 +50,7 @@ class UserUpdateView(LoginRequiredMixin, TemplateView):
         file_data = request.FILES or None
 
         user_form = UserForm(post_data, instance=request.user)
-        profile_form = ProfileForm(file_data, instance=request.user.profile)
+        profile_form = ProfileForm(post_data,file_data, instance=request.user.profile)
 
         if user_form.is_valid() and profile_form.is_valid():
             #Aplicar cambios
@@ -64,7 +64,7 @@ class UserUpdateView(LoginRequiredMixin, TemplateView):
             user_form=user_form,
             profile_form=profile_form
         )
-        return render(request, context)
+        return render(request,"profile/edit_profile.html", context)
     
     def get(self, request, *args, **kwargs):
         if Profile.objects.filter(user=request.user).exists() == False:

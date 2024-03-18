@@ -54,6 +54,12 @@ class ProfileForm(forms.ModelForm):
                              help_text=None,
                              required=False,
                              widget=forms.FileInput())
+    profession = forms.CharField(required=False)
+    about = forms.CharField(required=False)
+    birthday = forms.DateField(required=False,widget=forms.SelectDateWidget(years=range(1940,2024)))
+    twitter = forms.CharField(required=False)
+    linkedin = forms.CharField(required=False)
+    facebook = forms.CharField(required=False)
     
     class Meta:
         model = Profile
