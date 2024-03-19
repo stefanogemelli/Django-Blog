@@ -27,14 +27,12 @@ class Profile(models.Model):
 @receiver(post_save, sender=User)
 def email(sender, instance, created, **kwargs):
     if created:
-        print("Envío de email al registrarse, la config actual está obsoleta por cambios en la api de google")
-
-        # send_mail(
-        # "Subject here",
-        # "Here is the message. Welcome, you have successfully on our site",
-        # os.getenv("EMAIL_HOST_USER"),
-        # [instance.email],
-        # )   
+        send_mail(
+        "Subject here",
+        "Here is the message. Welcome, you have successfully on our site",
+        os.getenv("EMAIL_HOST_USER"),
+        [instance.email],
+        )   
 
 
 
