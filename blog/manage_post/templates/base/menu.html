@@ -10,20 +10,20 @@
         <nav class="nav">
             {% if request.user.is_authenticated %}
             <ul class="profile">
-
-                <li>
-                    <!-- Imagen del usuario -->
-                    {% if request.user.profile %}
-                    <img src="{{ request.user.profile.photo.url }}" alt="Profile"
-                         class="img-profile">
-                    {% else %}
-                    <img src="{% static 'base/image/Default/default-user.png' %}" alt="Profile"
-                         class="img-profile">
-                    {% endif %}
-                    <!-- Nombre completo del usuario -->
-                        <span class="name-user">{{ request.user.full_name }}</span>
-                </li>
-
+                <a href="{% url 'view_profile' request.user.pk %}" class="profile-img-name" title="Ver perfil">
+                    <li>
+                        <!-- Imagen del usuario -->
+                        {% if request.user.profile %}
+                        <img src="{{ request.user.profile.photo.url }}" alt="Profile"
+                            class="img-profile">
+                        {% else %}
+                        <img src="{% static 'base/image/Default/default-user.png' %}" alt="Profile"
+                            class="img-profile">
+                        {% endif %}
+                        <!-- Nombre completo del usuario -->
+                            <span class="name-user">{{ request.user.full_name }}</span>
+                    </li>
+                </a>
                 <!-- Botón de editar perfil -->
                 <li>
                     <a href="{% url 'edit_user' %}" class="btn-edit-profile">Editar perfil</a>
