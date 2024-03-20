@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from ckeditor.fields import RichTextField
 
 User = get_user_model()
 
@@ -26,7 +27,7 @@ class Article(models.Model):
     introduction = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255)
     image = models.ImageField(upload_to="Articles",blank=False,null=False)
-    body = models.TextField()
+    body = RichTextField()
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     categories = models.ManyToManyField(Category)
     created = models.DateTimeField(auto_now_add=True)
