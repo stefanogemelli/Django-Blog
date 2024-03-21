@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+import dj_database_url
 
 # Cargar variables de entorno desde .env
 load_dotenv()
@@ -30,7 +31,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -61,6 +62,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware"
 ]
 
 ROOT_URLCONF = "blog.urls"
@@ -88,15 +90,21 @@ WSGI_APPLICATION = "blog.wsgi.application"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "HOST": os.getenv("DB_HOST"),
-        "NAME": os.getenv("DB_NAME"),
-        "USER": os.getenv("DB_USER"),
-        "PASSWORD": os.getenv("DB_PASSWORD"),
-        "PORT": os.getenv("DB_PORT")
-    }
+    "default": dj_database_url.config(
+        default=os.getenv("DATABASE_URL")
+    )
 }
+
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "HOST": os.getenv("DB_HOST"),
+#         "NAME": os.getenv("DB_NAME"),
+#         "USER": os.getenv("DB_USER"),
+#         "PASSWORD": os.getenv("DB_PASSWORD"),
+#         "PORT": os.getenv("DB_PORT")
+#     }
+# }
 
 AUTH_USER_MODEL = "user.User"
 
@@ -176,3 +184,6 @@ EMAIL_HOST_USER= os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD= os.getenv("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS= bool(os.getenv("EMAIL_USE_TLS")) 
 EMAIL_USE_SSL = False
+
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
